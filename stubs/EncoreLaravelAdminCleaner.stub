@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Cleaners;
+
+use Encore\Admin\Admin;
+use HuangYi\Shadowfax\Contracts\Cleaner;
+use Illuminate\Contracts\Container\Container;
+use ReflectionClass;
+
+class EncoreLaravelAdminCleaner implements Cleaner
+{
+    /**
+     * The static properties should be reset.
+     *
+     * @var  array
+     */
+    protected $staticProperties = [
+        'deferredScript' => [],
+        'script'         => [],
+        'style'          => [],
+        'css'            => [],
+        'js'             => [],
+        'html'           => [],
+        'headerJs'       => [],
+        'manifestData'   => [],
+        'extensions'     => [],
+        'minifyIgnores'  => [],
+    ];
+
+    /**
+     * Clean "encore/laravel-admin" package.
+     *
+     * @param    \Illuminate\Contracts\Container\Container  $app
+     * @return  void
+     */
+    public function clean(Container $app)
+    {
+        $admin = new ReflectionClass(Admin::class);
+
+        foreach ($this->staticProperties as $name => $value) {
+            if ($admin->hasProperty($name)) {
+                $admin->setStaticPropertyValue($name, $value);
+            }
+        }
+    }
+}

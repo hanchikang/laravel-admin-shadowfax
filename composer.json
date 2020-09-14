@@ -1,0 +1,33 @@
+{
+    "name": "ckhan/laravel-admin-shadowfax",
+    "description": "description...",
+    "type": "library",
+    "keywords": ["laravel-admin", "extension", "shadowfax"],
+    "homepage": "https://github.com/hanchikang/laravel-admin-shadowfax",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ckhan",
+            "email": "chikang@vip.qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "encore/laravel-admin": "~1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CKHan\\LASAdapter\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CKHan\\LASAdapter\\LASAdapterServiceProvider"
+            ]
+        }
+    }
+}
